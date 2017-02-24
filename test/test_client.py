@@ -3,6 +3,7 @@ import struct
 import unittest
 import logging
 import time
+import mock
 
 from subprocess import Popen
 from os import path, kill
@@ -323,7 +324,7 @@ class TestClient(unittest.TestCase):
         pduRequested = self.client.get_param(10)
         pduSize = self.client.get_pdu_length()
         self.assertEqual(pduSize, pduRequested)
-    
+
     def test_get_cpu_info(self):
         expected = (
             ('ModuleTypeName', 'CPU 315-2 PN/DP'),
@@ -335,7 +336,7 @@ class TestClient(unittest.TestCase):
         cpuInfo = self.client.get_cpu_info()
         for param, value in expected:
             self.assertEqual(getattr(cpuInfo, param).decode('utf-8'), value)
-        
+
 
 
 class TestClientBeforeConnect(unittest.TestCase):
